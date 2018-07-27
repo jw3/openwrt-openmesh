@@ -23,4 +23,4 @@ RUN cd openwrt \
 RUN cd openwrt \
  && make defconfig \
  && grep "^[^#;]" .config | grep -i target \
- && FORCE_UNSAFE_CONFIGURE=1 make
+ && FORCE_UNSAFE_CONFIGURE=1 make -j1 V=s
