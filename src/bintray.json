@@ -1,0 +1,18 @@
+{
+    "package": {
+        "name": "openmesh",
+        "repo": "openwrt",
+        "subject": "jw3"
+    },
+
+    "version": {
+        "name": "VERSION"
+    },
+
+    "files":
+        [
+            {"includePattern": "/tmp/ap51-flash", "uploadPattern": "/$1"},
+            {"includePattern": "/tmp/openwrt-ar71xx-generic-om2p-squashfs-factory.bin", "uploadPattern": "/$1"}
+        ],
+    "publish": true
+}

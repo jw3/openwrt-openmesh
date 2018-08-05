@@ -1,0 +1,29 @@
+sudo: required
+
+services:
+- docker
+
+env:
+  global:
+  - VERSION="0.1"
+
+script:
+  - docker build -t "jwiii/openwrt-openmesh:$VERSION" .
+  - docker cp openwrt-openmesh:/tmp/ap51-flash/ap51-flash /tmp/
+  - docker cp openwrt-openmesh:/tmp/openwrt/trunk/bin/ar71xx/*.bin /tmp/
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push "jwiii/openwrt-openmesh:$VERSION"
+
+before_deploy:
+  - echo "preparing configuration for v$VERSION"
+  - sed "s#VERSION#$VERSION#" -i "$TRAVIS_BUILD_DIR/bintray.json"
+
+deploy:
+  skip_cleanup: true
+  provider: bintray
+  file: "bintray.json"
+  user: "jw3"
+  key: "$BINTRAY_API_KEY"
+  on:
+    tags: true
