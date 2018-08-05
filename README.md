@@ -42,6 +42,8 @@ https://wiki.openwrt.org/toh/openmesh/om2p
 
 - `odhcpd-ipv6only`
   - check_data_file_clashes: Package odhcpd-ipv6only wants to install file /openwrt/build_dir/target-mips_24kc_musl/root-ar71xx/etc/init.d/odhcpd But that file is already provided by package  * odhcpd
+  - https://git.openwrt.org/?p=openwrt/openwrt.git;a=commitdiff;h=c7b052db739e50f8a40f95ac17a21363b1593e33
+  - https://lists.openwrt.org/pipermail/openwrt-devel/2017-December/010191.html
 
 ### references
 - https://wiki.openwrt.org/toh/openmesh/om2p
