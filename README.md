@@ -45,6 +45,10 @@ https://wiki.openwrt.org/toh/openmesh/om2p
   - https://git.openwrt.org/?p=openwrt/openwrt.git;a=commitdiff;h=c7b052db739e50f8a40f95ac17a21363b1593e33
   - https://lists.openwrt.org/pipermail/openwrt-devel/2017-December/010191.html
 
+### artifacts
+
+the om2p flasher util and the firmware .bin are uploaded to bintray at ...
+
 ### references
 - https://wiki.openwrt.org/toh/openmesh/om2p
 - https://help.cloudtrax.com/hc/en-us/articles/202487954-Open-Mesh-and-OpenWRT
