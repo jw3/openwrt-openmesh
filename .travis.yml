@@ -8,7 +8,7 @@ env:
   - VERSION="0.1"
 
 script:
-  - docker build -t "jwiii/openwrt-openmesh:$VERSION" src
+  - travis_wait 120 docker build -t "jwiii/openwrt-openmesh:$VERSION" src
   - docker cp openwrt-openmesh:/tmp/ap51-flash/ap51-flash /tmp/
   - docker cp openwrt-openmesh:/tmp/openwrt/trunk/bin/ar71xx/*.bin /tmp/
 
