@@ -34,6 +34,20 @@ The recommended way to upgrade is via the "sysupgrade" script. Just copy the fac
 
 `sysupgrade /tmp/openwrt-ar71xx-generic-om2p-squashfs-factory.bin`
 
+### post-flash configuration
+
+- Connect via ssh `ssh root@192.168.1.1`
+- Set the root password `passwd`
+- Enable wifi `uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi`
+- Install the configuration webapp
+  - ```
+opkg update
+opkg install luci luci-ssl
+```
+- Start webapp `/etc/init.d/uhttpd start`
+- Start webapp on boot `/etc/init.d/uhttpd enable`
+- Access GUI at https://192.168.1.1
+
 ### source
 
 https://wiki.openwrt.org/toh/openmesh/om2p
@@ -49,6 +63,7 @@ https://wiki.openwrt.org/toh/openmesh/om2p
 - https://wiki.openwrt.org/toh/openmesh/om2p
 - https://help.cloudtrax.com/hc/en-us/articles/202487954-Open-Mesh-and-OpenWRT
 - https://help.cloudtrax.com/hc/en-us/articles/202382890-Open-Mesh-development-information
+- https://openwrt.org/docs/guide-user/luci/luci.essentials-tomerge
 
 ### history
 
