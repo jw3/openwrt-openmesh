@@ -7,6 +7,8 @@ RUN yum update -y \
         bzip2 zlib-static zlib-devel libssl openssl openssl-devel \
         net-tools perl-Data-Dumper perl-Thread-Queue
 
+WORKDIR /tmp
+
 RUN git clone https://dev.cloudtrax.com/git/ap51-flash.git ap51-flash \
  && cd ap51-flash \
  && make \
@@ -24,3 +26,10 @@ RUN cd openwrt \
  && make defconfig \
  && grep "^[^#;]" .config | grep -i target \
  && FORCE_UNSAFE_CONFIGURE=1 make -j1 V=s
+
+#------------------------
+
+FROM centos:7
+
+COPY --from=0 /tmp/ap51-flash/ap51-flash /usr/local/bin/
+COPY --from=0 /tmp/openwrt/bin/targets/ar71xx/generic/*.bin /tmp/

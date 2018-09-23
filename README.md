@@ -5,15 +5,25 @@ Docker based firmware build and flasher for the OpenWRT firmware and Open-Mesh h
 
 ### building
 
-After the build completes the firmware will be the following:
+After the build completes the firmware will be in `/tmp`:
 
-`trunk/bin/ar71xx/openwrt-ar71xx-generic-om2p-squashfs-factory.bin`
+```
+ls /tmp | grep openwrt
+openwrt-ar71xx-generic-om2p-squashfs-factory.bin
+openwrt-ar71xx-generic-om2p-squashfs-sysupgrade.bin
+openwrt-ar71xx-generic-uImage-lzma.bin
+openwrt-ar71xx-generic-vmlinux.bin
+```
+
+The `ap51-flash` tool will be in `/usr/local/bin`
 
 ### flashing
 
-Use the ap51-flash utility
+Using docker image
 
-`./ap51-flash eth0 trunk/bin/ar71xx/openwrt-ar71xx-generic-om2p-squashfs-factory.bin`
+```
+docker run --rm --privileged openwrt-openmesh ap51-flash eth /tmp/openwrt-ar71xx-generic-om2p-squashfs-factory.bin
+```
 
 Then plugin the OM2P in eth0 and power it up.
 
@@ -28,25 +38,27 @@ The output of the flash tool should look like this:
   [MA:C-:AD:DR:ES:S ]: OM2P router: flash complete. Device ready to unplug.
 ```
 
-### upgrades
-
-The recommended way to upgrade is via the "sysupgrade" script. Just copy the factory image (openwrt-ar71xx-generic-om2p-squashfs-factory.bin) to the /tmp folder and run:
-
-`sysupgrade /tmp/openwrt-ar71xx-generic-om2p-squashfs-factory.bin`
-
 ### post-flash configuration
 
 - Connect via ssh `ssh root@192.168.1.1`
 - Set the root password `passwd`
 - Enable wifi `uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi`
 - Install the configuration webapp
-  - ```
+
+```
 opkg update
 opkg install luci luci-ssl
 ```
+
 - Start webapp `/etc/init.d/uhttpd start`
 - Start webapp on boot `/etc/init.d/uhttpd enable`
 - Access GUI at https://192.168.1.1
+
+### upgrades
+
+The recommended way to upgrade is via the "sysupgrade" script. Just copy the factory image (openwrt-ar71xx-generic-om2p-squashfs-factory.bin) to the /tmp folder and run:
+
+`sysupgrade /tmp/openwrt-ar71xx-generic-om2p-squashfs-factory.bin`
 
 ### source
 
