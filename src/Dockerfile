@@ -33,3 +33,5 @@ FROM centos:7
 
 COPY --from=0 /tmp/ap51-flash/ap51-flash /usr/local/bin/
 COPY --from=0 /tmp/openwrt/bin/targets/ar71xx/generic/*.bin /tmp/
+
+WORKDIR /tmp
