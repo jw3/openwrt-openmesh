@@ -47,8 +47,10 @@ The output of the flash tool should look like this:
 
 ```
 opkg update
-opkg install luci luci-ssl
+opkg install luci
 ```
+
+or for ssl use `luci-ssl`
 
 - Start webapp `/etc/init.d/uhttpd start`
 - Start webapp on boot `/etc/init.d/uhttpd enable`
