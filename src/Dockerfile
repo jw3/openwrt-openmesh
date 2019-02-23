@@ -1,5 +1,7 @@
 FROM centos:7
 
+ARG OPENWRT_VERSION
+
 RUN yum update -y \
  && yum install -y \
         minicom lrzsz file which unzip wget patch git svn make gcc-c++ \
@@ -14,7 +16,7 @@ RUN git clone https://dev.cloudtrax.com/git/ap51-flash.git ap51-flash \
  && make \
  && cd ..
 
-RUN git clone https://github.com/openwrt/openwrt.git
+RUN git clone -b ${OPENWRT_VERSION} --single-branch https://github.com/openwrt/openwrt.git
 
 COPY .config openwrt
 
