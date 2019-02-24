@@ -17,6 +17,11 @@ openwrt-ar71xx-generic-vmlinux.bin
 
 The `ap51-flash` tool will be in `/usr/local/bin`
 
+
+#### build.sh
+
+`usage: build.sh <git-ref> [image-name]`
+
 ### flashing
 
 Using docker image the command is formed like so (mind the network device id)
@@ -38,11 +43,19 @@ The output of the flash tool should look like this:
   [MA:C-:AD:DR:ES:S ]: OM2P router: flash complete. Device ready to unplug.
 ```
 
+Kill the container and reboot the device.
+
+#### flash.sh
+
+`usage:flash.sh <eth-device> [tag]`
+
 ### post-flash configuration
 
 - Connect via ssh `ssh root@192.168.1.1`
 - Set the root password `passwd`
 - Enable wifi `uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi`
+- Switch pc connection to OpenWrt from ethernet to wifi
+- Disconnect ethernet from pc and attach it to router
 - Install the configuration webapp
 
 ```

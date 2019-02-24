@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# default to master for local build testing
+readonly ref="${SOURCE_BRANCH:-master}"
+
+echo "building with openwrt $ref"
+docker build --build-arg OPENWRT_VERSION="$ref" -t "$IMAGE_NAME" src/.
