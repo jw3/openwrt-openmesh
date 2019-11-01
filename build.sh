@@ -3,4 +3,4 @@
 readonly ref="${1?usage: build.sh <git-ref> [image-name]}"
 readonly tag="${2:-latest}"
 
-SOURCE_BRANCH="$ref" IMAGE_NAME="openwrt-openmesh:$img" ./hooks/build
+SOURCE_BRANCH="$ref" IMAGE_NAME="openwrt-openmesh:$tag" ./hooks/build
