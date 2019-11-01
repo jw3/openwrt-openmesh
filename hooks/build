@@ -4,4 +4,4 @@
 readonly ref="${SOURCE_BRANCH:-master}"
 
 echo "building with openwrt $ref"
-docker build --build-arg OPENWRT_VERSION="$ref" -t "$IMAGE_NAME" src/.
+docker build --build-arg http_proxy --build-arg https_proxy --build-arg OPENWRT_VERSION="$ref" -t "$IMAGE_NAME" src/.
