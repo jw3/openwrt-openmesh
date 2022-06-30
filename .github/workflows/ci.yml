@@ -1,0 +1,10 @@
+name: CI Build
+
+jobs:
+  build:
+    name: Build Flasher Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3.0.0
+        context: "{{defaultContext}}:src"
