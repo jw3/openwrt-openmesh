@@ -13,4 +13,5 @@ jobs:
     steps:
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.0.0
-        context: "{{defaultContext}}:src"
+        with:
+          context: "{{defaultContext}}:src"
