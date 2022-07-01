@@ -1,9 +1,13 @@
-OpenWRT on Open-Mesh
+OpenWRT on OpenMesh
 =====
 
 Docker based firmware build and flasher for the OpenWRT firmware and Open-Mesh hardware.
 
-### building
+## Using prebuilt docker image
+
+`docker pull ghcr.io/jw3/openwrt-openmesh:master`
+
+## Building
 
 After the build completes the firmware will be in `/tmp`:
 
@@ -22,7 +26,7 @@ The `ap51-flash` tool will be in `/usr/local/bin`
 
 `usage: build.sh <git-ref> [image-name]`
 
-### flashing
+## Flashing
 
 Using docker image the command is formed like so (mind the network device id)
 
@@ -49,15 +53,16 @@ Kill the container and reboot the device.
 
 `usage:flash.sh <eth-device> [tag]`
 
-### post-flash configuration
+## Configuration
+
+After flashing the following steps will prepare the router for use
 
 - Connect via ssh `ssh root@192.168.1.1`
 - Set the root password `passwd`
 - Enable wifi `uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi`
 - Switch pc connection to OpenWrt from ethernet to wifi
-- Disconnect ethernet from pc and attach it to router
+- Move ethernet connection from PC to WAN router
 - Install the configuration webapp
-
 ```
 opkg update
 opkg install luci
@@ -67,7 +72,16 @@ or for ssl use `luci-ssl`
 
 - Start webapp `/etc/init.d/uhttpd start`
 - Start webapp on boot `/etc/init.d/uhttpd enable`
-- Access GUI at https://192.168.1.1
+  - Access GUI at https://192.168.1.1
+
+### useful cli commands
+- If the default `192.168.1.1` address conflicts with the wan router, change the om2p address
+  - `uci set network.lan.ipaddr='192.168.2.1'; uci commit wireless; wifi` 
+- To enable dhcp on eth0 (this seemed to have been auto in the past)
+```
+uci set network.wwan=eth0; uci commit wireless
+uci set network.wwan.proto='dhcp'; uci commit wireless
+```
 
 ### upgrades
 
@@ -75,9 +89,6 @@ The recommended way to upgrade is via the "sysupgrade" script. Just copy the fac
 
 `sysupgrade /tmp/openwrt-ar71xx-generic-om2p-squashfs-factory.bin`
 
-### source
-
-https://wiki.openwrt.org/toh/openmesh/om2p
 
 ### errors
 
