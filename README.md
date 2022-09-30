@@ -31,7 +31,7 @@ The `ap51-flash` tool will be in `/usr/local/bin`
 Using docker image the command is formed like so (mind the network device id)
 
 ```
-docker run --rm --privileged --network=host openwrt-openmesh ap51-flash eth0 openwrt-ar71xx-generic-om2p-squashfs-factory.bin
+docker run --rm --privileged --network=host ghcr.io/jw3/openwrt-openmesh:master ap51-flash eth0 openwrt-ar71xx-generic-om2p-squashfs-factory.bin
 ```
 
 Then plugin the OM2P in eth0 and power it up.
